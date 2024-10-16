@@ -3,18 +3,23 @@
     "name": "ToDoApp",
     "slug": "ToDoApp",
     "version": "1.0.0",
+    "scheme": "mytodoapp",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": ["@react-native-google-signin/google-signin"],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "bundleIdentifier": "com.sparkz.todoapp",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.sparkz.todoapp",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -22,6 +27,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c71e669e-007e-451e-8a50-2676c41e930a"
+      }
     }
   }
 }
