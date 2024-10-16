@@ -13,7 +13,7 @@ A simple **To-Do app** built with **React Native**, using **GraphQL backend via 
 - GraphQL backend with real-time sync (using Nhost).
 - Persistent task storage with Apollo Client.
 - Interactive and mobile-friendly UI using Expo.
-- Referral-based reward system.
+- Referral count of each user.
 
 ---
 
