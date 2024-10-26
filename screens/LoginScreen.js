@@ -5,7 +5,7 @@ import { GoogleAuthProvider, signInWithCredential, signInWithEmailAndPassword } 
 import * as Google from 'expo-auth-session/providers/google';
 import * as WebBrowser from 'expo-web-browser';
 import { auth } from '../firebaseConfig';
-
+import appConfig from '../appConfig';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -13,8 +13,8 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId:'532472796202-75vmbup0110oj60bff5vatroq13rqjd3.apps.googleusercontent.com',
-    webClientId:'532472796202-mi0j8i8k2o4jnld9fdm5hlpd7atuess7.apps.googleusercontent.com'
+    clientId:appConfig.googleAuth.clientId,
+    webClientId:appConfig.googleAuth.webClientId
   });
   useEffect(() => {
     if (response?.type === 'success') {

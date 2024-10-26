@@ -1,18 +1,8 @@
 
 import React, { useState } from 'react';
 import { View, TextInput, Alert, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebaseConfig';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
-import client from '../apolloClient';
-const ADD_USER = gql`
-  mutation InsertAppUsers($name: String, $number: String, $uid: String, $referrer: String, $email: String) {
-    insert_app_users(objects: { name: $name, number: $number, uid: $uid, referrer: $referrer ,email: $email}) {
-      affected_rows
-    }
-  }
-`;
+
+import { useUser } from '../UserContext';
 
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -20,15 +10,10 @@ export default function SignupScreen({ navigation }) {
   const [number, setNumber] = useState('');
   const [password, setPassword] = useState('');
   const [referrer, setReferrer] = useState(null);
-  const [addUser] = useMutation(ADD_USER,{client});
-
+  const { createUser } = useUser();
   const handleSignUp = async () => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const { user } = userCredential;
-      await addUser({
-        variables: { uid: user.uid, name, number, referrer ,email},
-      });
+      await createUser(email,password,name,number,referrer);
       Alert.alert('Account Created', 'You can now log in!');
       navigation.replace('Login');
     } catch (error) {

@@ -9,12 +9,21 @@ import SignupScreen from './screens/SignupScreen';
 import TodoScreen from './screens/TodoScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import { enableScreens } from 'react-native-screens';
+import { UserProvider } from './UserContext';
+import {loadDevMessages,loadErrorMessages} from '@apollo/client/dev'
+
+if(__DEV__){
+  loadDevMessages();
+  loadErrorMessages();
+}
+
 enableScreens();
 
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    <UserProvider>
     <GestureHandlerRootView>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main" screenOptions={{ headerShown: false }}>
@@ -26,5 +35,8 @@ export default function App() {
           </Stack.Navigator>
         </NavigationContainer>
     </GestureHandlerRootView>
+    </UserProvider>
   );
 }
+
+// Hasura jwt token and user permissions
